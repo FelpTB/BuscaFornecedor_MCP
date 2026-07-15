@@ -1,0 +1,14 @@
+O que eu tenho em mente de fazer é o seguinte:
+
+O n8n é composto por uma série de ferramentas (APIs) de códigos que ficam disponíveis via Http e comprem algumas funções:
+- Api de cidades: Recebe uma cidade brasileira e um raio em quilômetros, retorna algumas informações sobre todas as cidades presentes naquele raio.(Usado para localizar cidades dentro da área do raio)
+- API de Busca Qdrant: Acessa um banco no qdrant, implementa sistemas que permitem realizar buscas vetoriais passando pesos, valores de vetores densos, filtros de payload e valores de vetores esparsos.
+- Supabase: Acessa o banco de dados para consultar informações sobre as empresas buscadas e até para marcar informações de buscas e usuários.
+- OpenAi: Utiliza modelos da open Ai para vetorizar as consultas pra query no banco qdrant. Utiliza também alguns modelos para processamento da consulta do usuário.
+- API de envio de mensagens: Envia e-mails para empresas que participaram do resultado da busca.
+
+A ideia é disponibilizar todas essas funcionalidades em um hub de MCP disponível via n8n com trigger de MCP. Assim um agente consegue acessar todas essas ferramentas e usar para fazer uma busca precisa.
+
+Essa soluçaõ deve ser disponibilizada para Claude code e outras ferramentas de IA, mas principalmente para Microsoft copilot, funcionando como um agente de integração fácil que pode ser configurado e utilizado por um usuário sem conhecimento técnico.
+
+Desenhe para mim, por meio de uma apresnetaçaõ comercial completa, todo o processo de implementação dessa ferramenta e todas as funcionalidades e possibilidades que ela irá trazer quando completa.

@@ -1,0 +1,3 @@
+https://github.com/FelpTB/Qdrant_Request_API
+https://github.com/FelpTB/API-busca-cidades
+https://github.com/maicon-abc-advise/notificacao-clientes

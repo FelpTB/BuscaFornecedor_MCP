@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fluxo Profile Builder — BuscaFornecedor</title>
+  <link rel="icon" href="assets/logo-transparent.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+  <link rel="stylesheet" href="theme.css" />
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- CAPA -->
+      <section class="slide-cover" data-background-color="#0F3052">
+        <div class="logo-wrap">
+          <img src="assets/logo-transparent.png" alt="BuscaFornecedor" />
+        </div>
+        <span class="tag">Arquitetura técnica</span>
+        <h1 style="max-width: 22ch;">Pipeline de dados BuscaFornecedor</h1>
+        <p class="subtitle">
+          Scrape em escala · Chunking orientado ao contexto · LLM auto-hospedado · Busca vetorial híbrida
+        </p>
+        <p class="subtitle" style="font-size: 0.85rem; opacity: 0.75; margin-bottom: 0;">
+          buscafornecedor.com.br
+        </p>
+      </section>
+
+      <!-- SLIDE 1: SCRAPE -->
+      <section class="slide-content slide-scrape">
+        <div class="slide-header">
+          <img class="logo-sm" src="assets/logo-transparent.png" alt="BuscaFornecedor" />
+          <span class="slide-num">01 · Scrape em escala</span>
+        </div>
+        <h2>Scrape em escala</h2>
+        <p class="lead">Coletar evidência web em massa — main page e subpáginas — antes do enriquecimento por LLM.</p>
+
+        <div class="pro-context">
+          <div class="pro-obj">
+            <div class="pro-obj-label">Objetivo</div>
+            <p>
+              Realizar <strong>scrape em massa</strong> de milhares de sites de empresas: baixar HTML da página principal e das subpáginas internas relevantes e <strong>persistir o conteúdo bruto</strong> no PostgreSQL (<code>scrape_main</code>), de forma estável e auditável.
+            </p>
+          </div>
+          <div class="pro-challenges">
+            <div class="pro-challenges-label">Desafios → como o sistema responde</div>
+            <ul class="pro-map">
+              <li>
+                <span class="problem">Bloqueio anti-bot / WAF</span>
+                <span class="arrow">→</span>
+                <span class="solution"><code>curl_cffi</code> (fingerprint real) + proxies residenciais particionados</span>
+              </li>
+              <li>
+                <span class="problem">Sobrecarga e rate limit</span>
+                <span class="arrow">→</span>
+                <span class="solution">Batch assíncrono + semáforos por provider e por URL</span>
+              </li>
+              <li>
+                <span class="problem">Sites heterogêneos</span>
+                <span class="arrow">→</span>
+                <span class="solution">Timeout, 5 redirects, charset (headers/meta), pipeline em 3 etapas</span>
+              </li>
+              <li>
+                <span class="problem">Domínios lentos ou instáveis</span>
+                <span class="arrow">→</span>
+                <span class="solution">Stagger, limite por domínio, circuit breaker</span>
+              </li>
+              <li>
+                <span class="problem">Falhas sem rastreio</span>
+                <span class="arrow">→</span>
+                <span class="solution"><code>error_step1..3</code> + reprocessamento cirúrgico</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="pro-board">
+          <div class="pro-card">
+            <div class="pro-card-head">Cliente HTTP</div>
+            <ul class="pro-list">
+              <li><code>curl_cffi</code> imita Chrome/Safari — menos bloqueio por bot</li>
+              <li>Pool de sessões reutilizáveis; recicladas após N usos</li>
+              <li>Fim do batch: conexões fechadas (<code>cleanup_after_batch</code>)</li>
+              <li>Timeout configurável · até 5 redirects · charset via headers/meta</li>
+            </ul>
+          </div>
+
+          <div class="pro-card">
+            <div class="pro-card-head">Proxies · partição de carga</div>
+            <table class="pro-table">
+              <thead><tr><th>Provider</th><th>Conc.</th><th>Sessão</th></tr></thead>
+              <tbody>
+                <tr><td>711</td><td>800</td><td>30 min</td></tr>
+                <tr><td>Decodo</td><td>1500</td><td>24 h</td></tr>
+                <tr><td>Evomi</td><td>1200</td><td>40–120 min</td></tr>
+              </tbody>
+            </table>
+            <p class="pro-note">Limites calibrados por teste · divisão de carga (não fallback) · semáforo provider + por URL</p>
+          </div>
+
+          <div class="pro-card">
+            <div class="pro-card-head">Main page · 3 etapas</div>
+            <div class="pro-flow">
+              <div class="pro-flow-step">
+                <span class="n">1</span>
+                <span class="t">Fetch</span>
+                <span class="d">GET → <code>raw_content</code></span>
+              </div>
+              <span class="pro-flow-arrow">→</span>
+              <div class="pro-flow-step">
+                <span class="n">2</span>
+                <span class="t">Parse</span>
+                <span class="d">Texto + links</span>
+              </div>
+              <span class="pro-flow-arrow">→</span>
+              <div class="pro-flow-step">
+                <span class="n">3</span>
+                <span class="t">Validação</span>
+                <span class="d"><code>mainpage_processada</code></span>
+              </div>
+            </div>
+            <p class="pro-note">Erros em <code>error_step1..3</code> — reprocessamento cirúrgico</p>
+          </div>
+
+          <div class="pro-card">
+            <div class="pro-card-head">Subpáginas</div>
+            <ul class="pro-list">
+              <li>Links internos após a main (limite configurável)</li>
+              <li>Conteúdo agregado com marcadores <code>--- SUBPAGE: url ---</code></li>
+            </ul>
+          </div>
+
+          <div class="pro-card">
+            <div class="pro-card-head">Defesas</div>
+            <ul class="pro-list">
+              <li><strong>Stagger</strong> — delay entre requests</li>
+              <li><strong>Por domínio</strong> — máx. ~3 conexões/host</li>
+              <li><strong>Circuit breaker</strong> — pausa domínios problemáticos</li>
+            </ul>
+          </div>
+
+          <div class="pro-card pro-card-accent">
+            <div class="pro-card-head">Batch</div>
+            <ul class="pro-list">
+              <li>Até 1200 empresas/provider por onda</li>
+              <li>Flush periódico ao Postgres</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bar">
+          <span>BuscaFornecedor · api_scraper</span>
+          <span>curl_cffi · proxy_pool · scrape_main</span>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: CHUNKING -->
+      <section class="slide-content slide-pro">
+        <div class="slide-header">
+          <img class="logo-sm" src="assets/logo-transparent.png" alt="BuscaFornecedor" />
+          <span class="slide-num">02 · Chunkenização</span>
+        </div>
+        <h2>Chunkenização orientada ao contexto LLM</h2>
+        <p class="lead">Do HTML agregado às unidades que cabem na janela do modelo — módulo <code>app/core/chunking/</code></p>
+
+        <div class="pro-context">
+          <div class="pro-obj">
+            <div class="pro-obj-label">Objetivo</div>
+            <p>
+              Transformar o texto agregado (main + subpáginas) em <strong>chunks</strong> que respeitam a janela de contexto do LLM — incluindo system prompt, formatação de chat e margem de segurança — e persistir em <code>scraped_chunks</code> para o <code>profile_builder</code>.
+            </p>
+          </div>
+          <div class="pro-challenges">
+            <div class="pro-challenges-label">Desafios → como o sistema responde</div>
+            <ul class="pro-map">
+              <li>
+                <span class="problem">Estourar o contexto do LLM</span>
+                <span class="arrow">→</span>
+                <span class="solution"><code>effective_max_tokens</code> ≈ <strong>14 705</strong> (não usar só <code>max_chunk_tokens</code>)</span>
+              </li>
+              <li>
+                <span class="problem">Páginas gigantes (~40k tokens)</span>
+                <span class="arrow">→</span>
+                <span class="solution"><code>_split_large_page()</code> + <code>enforce_limit()</code> recursivo</span>
+              </li>
+              <li>
+                <span class="problem">Excesso de chamadas LLM</span>
+                <span class="arrow">→</span>
+                <span class="solution">Agrupar páginas pequenas até ~<code>group_target_tokens</code> (12k)</span>
+              </li>
+              <li>
+                <span class="problem">Ruído (menus, headers)</span>
+                <span class="arrow">→</span>
+                <span class="solution"><code>dedupe</code> em escopo <code>document</code></span>
+              </li>
+              <li>
+                <span class="problem">Contagem de tokens imprecisa</span>
+                <span class="arrow">→</span>
+                <span class="solution">Validar chunk <em>inteiro</em> · fallback <code>_split_by_chars</code></span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="pro-board">
+          <div class="pro-card">
+            <div class="pro-card-head">Entrada · agregação</div>
+            <ul class="pro-list">
+              <li>Texto unificado do scrape com marcadores por URL</li>
+              <li><code>process_content()</code> → SmartChunker + ChunkValidator</li>
+            </ul>
+            <div class="pro-code-lite">--- PAGE START: {url} ---<br>--- SUBPAGE: {url} ---</div>
+          </div>
+
+          <div class="pro-card">
+            <div class="pro-card-head">Limite efetivo</div>
+            <div class="pro-formula">(20k − 2,5k − 200) × 0,85 = <strong>14 705</strong> tokens</div>
+            <table class="pro-table">
+              <thead><tr><th>Parâmetro</th><th>Valor</th></tr></thead>
+              <tbody>
+                <tr><td><code>max_chunk_tokens</code></td><td>20 000</td></tr>
+                <tr><td><code>safety_margin</code></td><td>0,85</td></tr>
+                <tr><td><code>group_target</code></td><td>12 000</td></tr>
+                <tr><td><code>min_chunk_chars</code></td><td>500</td></tr>
+              </tbody>
+            </table>
+            <p class="pro-note">Tokenizer <code>mistral-common</code> · fallback <code>estimate</code></p>
+          </div>
+
+          <div class="pro-card">
+            <div class="pro-card-head">SmartChunker</div>
+            <ul class="pro-list">
+              <li><strong>Grandes:</strong> divide por parágrafos/blocos</li>
+              <li><strong>Pequenas:</strong> agrupa até ~12k tokens</li>
+              <li><strong>Dedupe:</strong> remove linhas repetidas antes da contagem</li>
+            </ul>
+          </div>
+
+          <div class="pro-card">
+            <div class="pro-card-head">ChunkValidator</div>
+            <ul class="pro-list">
+              <li>Valida tokens, conteúdo não vazio, mín. de chars</li>
+              <li>Política <strong>nunca truncar</strong> — só dividir</li>
+              <li><code>enforce_limit()</code> → recursão ou split binário</li>
+            </ul>
+          </div>
+
+          <div class="pro-card">
+            <div class="pro-card-head">Lição · incidente 40k</div>
+            <p class="pro-callout" style="margin-top:0;">
+              <strong>Soma por parágrafo ≠ chunk inteiro</strong> — causava loop entre chunker e validator. Fix: re-medir o artefato final após montar o chunk.
+            </p>
+          </div>
+
+          <div class="pro-card pro-card-accent">
+            <div class="pro-card-head">Contrato · profile_builder</div>
+            <ul class="pro-list">
+              <li><code>scraped_chunks</code> · <code>perfil_processado=false</code></li>
+              <li><strong>1 chunk</strong> → 1 inferência → perfil completo</li>
+              <li><strong>N chunks</strong> → merge LLM (sem alucinar campos vazios)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bar">
+          <span>BuscaFornecedor · SmartChunker + ChunkValidator</span>
+          <span>configs/chunking/chunking.json</span>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: LLM -->
+      <section class="slide-content slide-pro">
+        <div class="slide-header">
+          <img class="logo-sm" src="assets/logo-transparent.png" alt="BuscaFornecedor" />
+          <span class="slide-num">03 · LLM auto-hospedado</span>
+        </div>
+        <h2>LLM auto-hospedado: custo abaixo da API comercial</h2>
+        <p class="lead"><strong>Qwen2.5-14B</strong> (Phoenix fine-tuned) · <strong>SGLang</strong> no <strong>Vast.ai</strong> · <code>profile_builder</code></p>
+
+        <div class="pro-context">
+          <div class="pro-obj">
+            <div class="pro-obj-label">Objetivo</div>
+            <p>
+              <strong>Reduzir o custo</strong> do enriquecimento em escala — milhares de perfis via API comercial (GPT-4o, Claude etc.) ficam inviáveis por token; GPU própria no <strong>Vast.ai</strong> converte o gasto em <strong>GPU-hora previsível</strong>, muito menor no volume do pipeline.
+            </p>
+            <div class="pro-code-lite" style="margin-top:0.4rem;">Mesmo workload: 10k chunks → 10k JSONs · auto-hospedar &lt; API gerenciada em massa</div>
+          </div>
+          <div class="pro-challenges">
+            <div class="pro-challenges-label">Desafios → como o sistema responde</div>
+            <ul class="pro-map">
+              <li>
+                <span class="problem">API comercial cara em volume</span>
+                <span class="arrow">→</span>
+                <span class="solution">LLM próprio · fila <code>gpu_manager</code> · pay-per-hour no Vast.ai</span>
+              </li>
+              <li>
+                <span class="problem">Volume massivo de inferências</span>
+                <span class="arrow">→</span>
+                <span class="solution"><strong>SGLang:</strong> batching, KV cache — mais perfis por GPU-hora</span>
+              </li>
+              <li>
+                <span class="problem">JSON complexo inválido</span>
+                <span class="arrow">→</span>
+                <span class="solution">Structured Outputs + <code>json_schema</code> — menos retries = menos custo</span>
+              </li>
+              <li>
+                <span class="problem">Custo e disponibilidade de GPU</span>
+                <span class="arrow">→</span>
+                <span class="solution"><strong>Vast.ai:</strong> leilão mais barato + maior oferta de RTX vs RunPod</span>
+              </li>
+              <li>
+                <span class="problem">Modelo OSS fine-tuned</span>
+                <span class="arrow">→</span>
+                <span class="solution">Qwen Phoenix no HF Hub · suporte SGLang antes do vLLM</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="pro-board">
+          <div class="pro-card">
+            <div class="pro-card-head">1 · Throughput em massa</div>
+            <ul class="pro-list">
+              <li>Gargalo: <strong>GPU util</strong>, não qualidade do modelo</li>
+              <li>SGLang otimiza batching + KV cache</li>
+              <li>Topo em benchmarks: req/s, tokens/s</li>
+            </ul>
+            <p class="pro-note">Perfil ideal: classificação, extração, enriquecimento batch</p>
+          </div>
+
+          <div class="pro-card">
+            <div class="pro-card-head">2 · JSON estruturado</div>
+            <ul class="pro-list">
+              <li><code>CompanyProfile</code> aninhado (ofertas, contato…)</li>
+              <li>Menos JSON quebrado, campos faltando, retries</li>
+              <li>Grammar / schema nativo no servidor</li>
+            </ul>
+            <p class="pro-note">JSON válido &gt; texto “bonito”</p>
+          </div>
+
+          <div class="pro-card">
+            <div class="pro-card-head">3 · GPUs comerciais (RTX)</div>
+            <ul class="pro-list">
+              <li>Otimizações OSS focadas em RTX 4090/5090, A6000</li>
+              <li>Clusters comuns: 2×–8× 4090 para inferência</li>
+              <li>Alternativa natural ao datacenter-only</li>
+            </ul>
+          </div>
+
+          <div class="pro-card">
+            <div class="pro-card-head">4 · Modelos OSS recentes</div>
+            <ul class="pro-list">
+              <li>Qwen / Llama / DeepSeek: suporte SGLang costuma sair primeiro</li>
+              <li>Exemplos oficiais dos labs priorizam SGLang</li>
+              <li>vLLM permanece opção se já estável</li>
+            </ul>
+          </div>
+
+          <div class="pro-card">
+            <div class="pro-card-head">Pipeline · profile_builder</div>
+            <ul class="pro-list">
+              <li>Loader → Processors (<code>GPUs×15</code>) → Savers (20)</li>
+              <li>Multi-chunk: merge sem alucinar campos vazios</li>
+              <li>API OpenAI-compatible · Prometheus</li>
+            </ul>
+          </div>
+
+          <div class="pro-card pro-card-accent">
+            <div class="pro-card-head">Deploy · Vast.ai</div>
+            <ul class="pro-list">
+              <li><strong>Custo:</strong> marketplace por leilão, pay-per-hour</li>
+              <li><strong>Disponibilidade:</strong> mais oferta de placas RTX no momento da escala</li>
+              <li>Treino + inferência no mesmo ecossistema · <code>sglang.launch_server</code></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bar">
+          <span>BuscaFornecedor · profile_builder · SGLang</span>
+          <span>context 32k · response_format json_schema</span>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: QDRANT -->
+      <section class="slide-content slide-pro">
+        <div class="slide-header">
+          <img class="logo-sm" src="assets/logo-transparent.png" alt="BuscaFornecedor" />
+          <span class="slide-num">04 · Banco vetorizado</span>
+        </div>
+        <h2>Busca híbrida: nuances, produto vs serviço e BM25</h2>
+        <p class="lead"><strong>Qdrant Cloud</strong> (sa-east-1) · <code>qdrant_busca</code> · 5 vetores densos + BM25 esparso</p>
+
+        <div class="pro-context">
+          <div class="pro-obj">
+            <div class="pro-obj-label">Objetivo</div>
+            <p>
+              Entregar uma busca <strong>funcional e rápida</strong> capaz de capturar as <strong>nuances mínimas</strong> da intenção do usuário — distinguir se a consulta pende para <strong>produto</strong> ou <strong>serviço</strong>, encontrar perfis para demandas específicas e usar <strong>BM25</strong> para acertar nomes, SKUs e termos exatos que embedding denso dilui.
+            </p>
+            <div class="pro-code-lite" style="margin-top:0.4rem;">“cartucho HP 662XL” → produto · “consultoria SAP” → serviço · “SOS Cartuchos” → BM25</div>
+          </div>
+          <div class="pro-challenges">
+            <div class="pro-challenges-label">Desafios → como o sistema responde</div>
+            <ul class="pro-map">
+              <li>
+                <span class="problem">Um embedding dilui sinais</span>
+                <span class="arrow">→</span>
+                <span class="solution"><strong>5 vetores nomeados</strong> por dimensão semântica independente</span>
+              </li>
+              <li>
+                <span class="problem">Query produto ≠ query serviço</span>
+                <span class="arrow">→</span>
+                <span class="solution">Pesos em <code>v_produto</code> vs <code>v_servico</code> no <code>POST /search</code></span>
+              </li>
+              <li>
+                <span class="problem">Nomes, siglas, códigos raros</span>
+                <span class="arrow">→</span>
+                <span class="solution"><code>bm25_complete_profile</code> + <code>bm25_query</code> textual</span>
+              </li>
+              <li>
+                <span class="problem">Filtros geo / segmento</span>
+                <span class="arrow">→</span>
+                <span class="solution">Payload (UF, cidade, indústria) <strong>antes</strong> da fusão de scores</span>
+              </li>
+              <li>
+                <span class="problem">Reindex e perfis esparsos</span>
+                <span class="arrow">→</span>
+                <span class="solution">Point ID determinístico por CNPJ · fallbacks em cascata</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="pro-board">
+          <div class="pro-card">
+            <div class="pro-card-head">Dimensões densas</div>
+            <table class="pro-table">
+              <thead><tr><th>Dim.</th><th>Vetor</th><th>Fonte</th></tr></thead>
+              <tbody>
+                <tr><td>Produto</td><td><code>v_produto</code></td><td><code>ofertas.produtos</code></td></tr>
+                <tr><td>Serviço</td><td><code>v_servico</code></td><td><code>ofertas.servicos</code></td></tr>
+                <tr><td>Descrição</td><td><code>v_descricao</code></td><td><code>identidade.descricao</code></td></tr>
+                <tr><td>Público</td><td><code>v_publico</code></td><td><code>classificacao.publico_alvo</code></td></tr>
+                <tr><td>Clientes</td><td><code>v_cliente</code></td><td><code>reputacao.lista_clientes</code></td></tr>
+              </tbody>
+            </table>
+            <p class="pro-note">OpenAI <code>text-embedding-3-small</code> · 512d · cosine</p>
+          </div>
+
+          <div class="pro-card">
+            <div class="pro-card-head">Produto vs serviço</div>
+            <ul class="pro-list">
+              <li>Cada dimensão embedada só se tiver texto (<code>filledVectorKeys</code>)</li>
+              <li>Pesos configuráveis somam <strong>1,0</strong> por query</li>
+              <li>Score por dimensão exposto em <code>dim_scores</code></li>
+            </ul>
+            <p class="pro-note">Classifica o quanto o match veio de produto, serviço ou outras facetas</p>
+          </div>
+
+          <div class="pro-card">
+            <div class="pro-card-head">BM25 · match lexical</div>
+            <ul class="pro-list">
+              <li>Vetor esparso sobre perfil concatenado</li>
+              <li>Complementa cosine: paráfrase vs termo exato</li>
+              <li>Ideal para nomes de empresa, marcas, SKUs</li>
+            </ul>
+            <div class="pro-code-lite" style="margin-top:0.35rem;">dense: similaridade · BM25: “SOS Cartuchos Mooca”</div>
+          </div>
+
+          <div class="pro-card">
+            <div class="pro-card-head">Fusão híbrida · POST /search</div>
+            <ul class="pro-list">
+              <li>Path A (BM25-first) + Path B (dense + modifier)</li>
+              <li>RRF merge · peso <code>bm25</code> junto às dimensões</li>
+              <li>Modo opcional <code>rerank</code> com LLM no pool</li>
+            </ul>
+          </div>
+
+          <div class="pro-card">
+            <div class="pro-card-head">Pipeline · qdrant_busca</div>
+            <ul class="pro-list">
+              <li><code>qdrant=false</code> → transform → embed → upsert</li>
+              <li><code>UPDATE qdrant=true</code> · lotes até 25k</li>
+              <li>Mesmo contrato no <code>simplified-flow/approve</code></li>
+            </ul>
+          </div>
+
+          <div class="pro-card pro-card-accent">
+            <div class="pro-card-head">Contrato · produto</div>
+            <ul class="pro-list">
+              <li>BuscaFornecedor consulta Qdrant — <strong>não</strong> re-scrapeia</li>
+              <li>1 ponto por CNPJ · filtros + ranking em ms</li>
+              <li>Demandas específicas via combinação pesos + BM25 + payload</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bar">
+          <span>BuscaFornecedor · multiVectorSearch.js</span>
+          <span>docs/qdrant_busca.md · sa-east-1</span>
+        </div>
+      </section>
+
+      <!-- ENCERRAMENTO -->
+      <section class="slide-cover" data-background-color="#0F3052">
+        <div class="logo-wrap">
+          <img src="assets/logo-transparent.png" alt="BuscaFornecedor" />
+        </div>
+        <span class="tag">Obrigado</span>
+        <h1 style="max-width: none;">Perguntas?</h1>
+        <p class="subtitle">
+          Conectando compradores e fornecedores através de tecnologia e dados inteligentes.
+        </p>
+        <p class="subtitle" style="font-size: 0.9rem; margin-bottom: 0;">
+          <a href="https://buscafornecedor.com.br/" style="color: #fff;">buscafornecedor.com.br</a>
+        </p>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: "c/t",
+      width: 1280,
+      height: 720,
+      margin: 0.04,
+      transition: "slide",
+      backgroundTransition: "fade",
+    });
+  </script>
+</body>
+</html>

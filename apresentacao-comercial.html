@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MCP Search Hub — BuscaFornecedor</title>
+  <link rel="icon" href="assets/logo-transparent.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+  <link rel="stylesheet" href="theme.css" />
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- CAPA -->
+      <section class="slide-cover" data-background-color="#0F3052">
+        <div class="logo-wrap">
+          <img src="assets/logo-transparent.png" alt="BuscaFornecedor" />
+        </div>
+        <span class="tag">Apresentação comercial</span>
+        <h1 style="max-width: 18ch;">MCP Search Hub</h1>
+        <p class="subtitle">
+          Unificando busca inteligente e ações comerciais — para o time usar no dia a dia, sem virar especialista técnico.
+        </p>
+        <p class="subtitle" style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 0;">
+          Microsoft Copilot · Claude · BuscaFornecedor
+        </p>
+      </section>
+
+      <!-- AGENDA -->
+      <section class="slide-content">
+        <div class="slide-header">
+          <img class="logo-sm" src="assets/logo-transparent.png" alt="BuscaFornecedor" />
+          <span class="slide-num">01 · Agenda</span>
+        </div>
+        <h2>O que vamos percorrer</h2>
+        <p class="lead">Uma visão de negócio: o problema, a solução, o valor e o caminho de implementação.</p>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Contexto e oportunidade</h3>
+            <ul>
+              <li>Por que a busca tradicional limita o comercial</li>
+              <li>O que muda com agentes de IA + MCP</li>
+              <li>Como Copilot e Claude entram na jornada</li>
+            </ul>
+          </div>
+          <div class="card card-accent">
+            <h3>Solução e entrega</h3>
+            <ul>
+              <li>O que o Hub oferece ao usuário final</li>
+              <li>Governança, segurança e ROI</li>
+              <li>Plano de implementação em 4 fases</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bar">
+          <span>BuscaFornecedor · MCP Search Hub</span>
+          <span>Público: negócio e operação</span>
+        </div>
+      </section>
+
+      <!-- PROBLEMA -->
+      <section class="slide-content">
+        <div class="slide-header">
+          <img class="logo-sm" src="assets/logo-transparent.png" alt="BuscaFornecedor" />
+          <span class="slide-num">02 · O desafio</span>
+        </div>
+        <h2>Hoje a inteligência está espalhada</h2>
+        <p class="lead">Dados de fornecedores, localidade, CRM e envio de mensagens existem — mas o usuário ainda opera tela por tela.</p>
+        <div class="grid-3">
+          <div class="card">
+            <span class="badge muted">Busca</span>
+            <h3>Consultas rígidas</h3>
+            <p>O comprador precisa traduzir a necessidade em filtros, telas e passos manuais.</p>
+          </div>
+          <div class="card">
+            <span class="badge muted">Operação</span>
+            <h3>Ferramentas em silos</h3>
+            <p>Localização, ranking, contato e registro no CRM vivem em fluxos separados.</p>
+          </div>
+          <div class="card">
+            <span class="badge muted">Escala</span>
+            <h3>Dependência técnica</h3>
+            <p>Cada nova ação (e-mail, SMS, ajuste de raio) exige alguém que “conheça o sistema”.</p>
+          </div>
+        </div>
+        <div class="footer-bar">
+          <span>BuscaFornecedor · MCP Search Hub</span>
+          <span>Do portal ao agente conversacional</span>
+        </div>
+      </section>
+
+      <!-- ANTES X DEPOIS -->
+      <section class="slide-content">
+        <div class="slide-header">
+          <img class="logo-sm" src="assets/logo-transparent.png" alt="BuscaFornecedor" />
+          <span class="slide-num">03 · Mudança de paradigma</span>
+        </div>
+        <h2>Do fluxo engessado ao agente que decide</h2>
+        <p class="lead">Em vez de botões fixos, o usuário declara a intenção — e o Hub escolhe as ferramentas certas.</p>
+        <div class="compare">
+          <div class="card past">
+            <span class="badge muted">Antes</span>
+            <h3>Sistemas tradicionais</h3>
+            <ul class="vs-list">
+              <li class="no"><span class="mark">✕</span><span>Pedido explícito, etapa por etapa</span></li>
+              <li class="no"><span class="mark">✕</span><span>Roteiro fixo (“hardcoded”)</span></li>
+              <li class="no"><span class="mark">✕</span><span>Telas dedicadas e equipes especializadas</span></li>
+            </ul>
+          </div>
+          <div class="card future card-accent">
+            <span class="badge good">Com MCP Hub</span>
+            <h3>Agente conversacional</h3>
+            <ul class="vs-list">
+              <li class="yes"><span class="mark">✓</span><span>Intenção em linguagem natural</span></li>
+              <li class="yes"><span class="mark">✓</span><span>A IA orquestra busca, filtros e ações</span></li>
+              <li class="yes"><span class="mark">✓</span><span>Mesmo poder no Teams, Copilot ou Claude</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bar">
+          <span>BuscaFornecedor · MCP Search Hub</span>
+          <span>Fim da era só-determinística</span>
+        </div>
+      </section>
+
+      <!-- O QUE É O HUB -->
+      <section class="slide-content">
+        <div class="slide-header">
+          <img class="logo-sm" src="assets/logo-transparent.png" alt="BuscaFornecedor" />
+          <span class="slide-num">04 · A solução</span>
+        </div>
+        <h2>Um hub que fala a língua do negócio</h2>
+        <p class="lead">O MCP Search Hub expõe as capacidades do BuscaFornecedor como ferramentas que a IA já sabe usar.</p>
+        <div class="grid-5">
+          <div class="card capability">
+            <h3><span class="icon-dot"></span>Busca inteligente</h3>
+            <p>Encontra fornecedores pelo sentido da necessidade — produto, serviço ou ambos.</p>
+          </div>
+          <div class="card capability">
+            <h3><span class="icon-dot"></span>Localização</h3>
+            <p>Restringe a cidades no raio pedido (ex.: 50 km de Campinas).</p>
+          </div>
+          <div class="card capability">
+            <h3><span class="icon-dot"></span>Contexto LLM</h3>
+            <p>Entende a intenção e ajusta a estratégia de busca automaticamente.</p>
+          </div>
+          <div class="card capability">
+            <h3><span class="icon-dot"></span>CRM / auditoria</h3>
+            <p>Consulta e registra buscas, usuários e interações.</p>
+          </div>
+          <div class="card capability">
+            <h3><span class="icon-dot"></span>Mensageria</h3>
+            <p>Dispara e-mail ou SMS após aprovação humana.</p>
+          </div>
+        </div>
+        <div class="card card-navy" style="margin-top: 0.75rem;">
+          <h3>Em uma frase</h3>
+          <p>Transformamos APIs e fluxos internos em um sistema autônomo — acessível para diretores no Copilot e para times técnicos no Claude.</p>
+        </div>
+        <div class="footer-bar">
+          <span>BuscaFornecedor · MCP Search Hub</span>
+          <span>Cinco capacidades, uma conversa</span>
+        </div>
+      </section>
+
+      <!-- COMO FUNCIONA SIMPLES -->
+      <section class="slide-content">
+        <div class="slide-header">
+          <img class="logo-sm" src="assets/logo-transparent.png" alt="BuscaFornecedor" />
+          <span class="slide-num">05 · Experiência</span>
+        </div>
+        <h2>Três camadas, uma experiência</h2>
+        <p class="lead">O usuário não vê infraestrutura — vê resposta útil no chat que já usa todos os dias.</p>
+        <div class="flow" style="margin-top: 0.5rem;">
+          <div class="flow-step">
+            <span class="n">1</span>
+            <span class="t">Você pede</span>
+            <span class="d">No Microsoft Copilot ou no Claude, em português</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">
+            <span class="n">2</span>
+            <span class="t">O Hub orquestra</span>
+            <span class="d">Escolhe busca, raio, ranking e próximas ações</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">
+            <span class="n">3</span>
+            <span class="t">Você decide</span>
+            <span class="d">Recebe a lista, aprova contatos e registra no CRM</span>
+          </div>
+        </div>
+        <div class="grid-3" style="margin-top: 0.85rem;">
+          <div class="card">
+            <h3>Interface</h3>
+            <p>Copilot (negócio) e Claude (engenharia / operação avançada).</p>
+          </div>
+          <div class="card">
+            <h3>Orquestrador</h3>
+            <p>Hub MCP via n8n — o “maestro” que traduz intenção em ação.</p>
+          </div>
+          <div class="card">
+            <h3>Arsenal</h3>
+            <p>Busca, geografia, dados de empresas e canais de envio já existentes.</p>
+          </div>
+        </div>
+        <div class="footer-bar">
+          <span>BuscaFornecedor · MCP Search Hub</span>
+          <span>Arquitetura hub-and-spoke, linguagem de negócio</span>
+        </div>
+      </section>
+
+      <!-- COPILOT -->
+      <section class="slide-content">
+        <div class="slide-header">
+          <img class="logo-sm" src="assets/logo-transparent.png" alt="BuscaFornecedor" />
+          <span class="slide-num">06 · Microsoft Copilot</span>
+        </div>
+        <h2>Como se comporta no Copilot</h2>
+        <p class="lead">Barreira de entrada zero: o diretor ou analista usa linguagem natural no Teams / Microsoft 365.</p>
+        <div class="grid-2">
+          <div class="chat">
+            <div class="meta">Usuário · Copilot</div>
+            <div class="bubble user">
+              Localize empresas de logística num raio de 50&nbsp;km de Campinas e prepare um e-mail de apresentação.
+            </div>
+            <div class="meta">Agente · ferramentas acionadas</div>
+            <div class="bubble agent">
+              Encontrei 18 fornecedores relevantes na região. Destaco 12 com melhor aderência.<br /><br />
+              Posso enviar o e-mail de apresentação para esses 12 contatos?
+            </div>
+          </div>
+          <div>
+            <div class="card" style="margin-bottom: 0.65rem;">
+              <h3>O que o Copilot faz por você</h3>
+              <ul>
+                <li>Interpreta a necessidade comercial</li>
+                <li>Aplica filtro geográfico automático</li>
+                <li>Prioriza fornecedores mais aderentes</li>
+                <li>Pede aprovação antes de qualquer envio</li>
+              </ul>
+            </div>
+            <div class="card card-warn">
+              <h3>Governança nativa</h3>
+              <p>Nada sai para o mercado sem “sim” explícito do usuário — Human-in-the-loop.</p>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bar">
+          <span>BuscaFornecedor · MCP Search Hub</span>
+          <span>Mesma fonte de verdade · interface de negócios</span>
+        </div>
+      </section>
+
+      <!-- CLAUDE -->
+      <section class="slide-content">
+        <div class="slide-header">
+          <img class="logo-sm" src="assets/logo-transparent.png" alt="BuscaFornecedor" />
+          <span class="slide-num">07 · Claude</span>
+        </div>
+        <h2>Como se comporta no Claude</h2>
+        <p class="lead">Para times técnicos e operações avançadas: o mesmo Hub, com mais controle e repetibilidade.</p>
+        <div class="grid-2">
+          <div class="card">
+            <span class="badge">Claude · Claude Code</span>
+            <h3>Uso típico</h3>
+            <ul>
+              <li>Validar buscas com critérios mais finos</li>
+              <li>Automatizar rotinas internas e testes</li>
+              <li>Integrar o Hub a fluxos de desenvolvimento</li>
+              <li>Explorar novos cenários sem abrir ticket de TI a cada ideia</li>
+            </ul>
+          </div>
+          <div class="card card-accent">
+            <span class="badge good">Valor</span>
+            <h3>Uma fonte, múltiplas portas</h3>
+            <p style="margin-bottom: 0.55rem;">
+              Diretores entram pelo Copilot; engenheiros e power users pelo Claude.
+              Ambos acionam o mesmo arsenal — sem duplicar lógica nem manter “versão sombra” da busca.
+            </p>
+            <div class="pill-row">
+              <span class="pill">Mesmas regras de negócio</span>
+              <span class="pill">Mesmo ranking</span>
+              <span class="pill">Mesma auditoria</span>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bar">
+          <span>BuscaFornecedor · MCP Search Hub</span>
+          <span>Copilot = adoção · Claude = profundidade</span>
+        </div>
+      </section>
+
+      <!-- JORNADA COMERCIAL -->
+      <section class="slide-content">
+        <div class="slide-header">
+          <img class="logo-sm" src="assets/logo-transparent.png" alt="BuscaFornecedor" />
+          <span class="slide-num">08 · Jornada</span>
+        </div>
+        <h2>Da intenção ao contato — em uma conversa</h2>
+        <p class="lead">O Hub encadeia entendimento, localização, ranking, limpeza de resultados e ação comercial.</p>
+        <div class="flow">
+          <div class="flow-step">
+            <span class="n">1</span>
+            <span class="t">Entende</span>
+            <span class="d">Produto, serviço ou misto</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">
+            <span class="n">2</span>
+            <span class="t">Recorta</span>
+            <span class="d">Cidade + raio (km)</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">
+            <span class="n">3</span>
+            <span class="t">Busca</span>
+            <span class="d">Significado + termos exatos</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">
+            <span class="n">4</span>
+            <span class="t">Ranqueia</span>
+            <span class="d">Score e deduplicação</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">
+            <span class="n">5</span>
+            <span class="t">Age</span>
+            <span class="d">E-mail / SMS + CRM</span>
+          </div>
+        </div>
+        <div class="card" style="margin-top: 0.85rem;">
+          <h3>Exemplo de necessidade</h3>
+          <p>
+            “Instalação de ar-condicionado em Sumaré, raio 50&nbsp;km” — o sistema reconhece intenção mista
+            (equipamento + serviço), filtra a região e prioriza fornecedores que realmente combinam com os dois lados.
+          </p>
+        </div>
+        <div class="footer-bar">
+          <span>BuscaFornecedor · MCP Search Hub</span>
+          <span>Inteligência aplicada ao funil comercial</span>
+        </div>
+      </section>
+
+      <!-- DIFERENCIAIS EM LINGUAGEM DE NEGÓCIO -->
+      <section class="slide-content">
+        <div class="slide-header">
+          <img class="logo-sm" src="assets/logo-transparent.png" alt="BuscaFornecedor" />
+          <span class="slide-num">09 · Diferenciais</span>
+        </div>
+        <h2>O que o Hub entrega melhor que a busca comum</h2>
+        <p class="lead">Sem jargão: três vantagens que o comprador e o comercial sentem na prática.</p>
+        <div class="grid-3">
+          <div class="card">
+            <span class="badge">Intenção</span>
+            <h3>Entende o que você quer</h3>
+            <p>Distingue comprar um produto, contratar um serviço ou precisar dos dois — e ajusta a prioridade da busca.</p>
+          </div>
+          <div class="card">
+            <span class="badge">Precisão</span>
+            <h3>Encontra o especialista certo</h3>
+            <p>Combina compreensão ampliada com correspondência exata de termos técnicos, marcas e nomes de empresa.</p>
+          </div>
+          <div class="card">
+            <span class="badge">Relevância local</span>
+            <h3>Só quem está no raio útil</h3>
+            <p>Evita listas “bonitas” de fornecedores inviáveis logísticamente — foca em quem realmente atende a região.</p>
+          </div>
+        </div>
+        <div class="footer-bar">
+          <span>BuscaFornecedor · MCP Search Hub</span>
+          <span>Mais aderência · menos ruido comercial</span>
+        </div>
+      </section>
+
+      <!-- POSSIBILIDADES -->
+      <section class="slide-content">
+        <div class="slide-header">
+          <img class="logo-sm" src="assets/logo-transparent.png" alt="BuscaFornecedor" />
+          <span class="slide-num">10 · Possibilidades</span>
+        </div>
+        <h2>O que se torna possível quando estiver completo</h2>
+        <p class="lead">Cenários de uso reais — para interno e para clientes finais da plataforma.</p>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Para compradores / sales ops</h3>
+            <ul>
+              <li>Briefing de sourcing em minutos, não em horas</li>
+              <li>Listas curadas por intenção + localização</li>
+              <li>Campanhas de abordagem com aprovação</li>
+              <li>Histórico auditável no CRM</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Para produto e parceiros</h3>
+            <ul>
+              <li>Canal Copilot como novo ponto de entrada</li>
+              <li>Mesma API de valor no Claude / outras IAs</li>
+              <li>Empacotar o Hub como diferencial B2B</li>
+              <li>Reduzir suporte “como eu faço a busca?”</li>
+            </ul>
+          </div>
+        </div>
+        <div class="pill-row">
+          <span class="pill">Teams / Microsoft 365</span>
+          <span class="pill">WhatsApp (jornada atual)</span>
+          <span class="pill">Portal buscafornecedor.com.br</span>
+          <span class="pill">Claude / Claude Code</span>
+        </div>
+        <div class="footer-bar">
+          <span>BuscaFornecedor · MCP Search Hub</span>
+          <span>Omnichannel com a mesma inteligência</span>
+        </div>
+      </section>
+
+      <!-- GOVERNANÇA -->
+      <section class="slide-content">
+        <div class="slide-header">
+          <img class="logo-sm" src="assets/logo-transparent.png" alt="BuscaFornecedor" />
+          <span class="slide-num">11 · Confiança</span>
+        </div>
+        <h2>Automação com controle humano</h2>
+        <p class="lead">A IA prepara; a pessoa autoriza — especialmente em comunicações externas.</p>
+        <div class="grid-3">
+          <div class="card">
+            <h3>1 · Alvos qualificados</h3>
+            <p>Só fornecedores acima do limiar de qualidade entram na lista de abordagem.</p>
+          </div>
+          <div class="card card-warn">
+            <h3>2 · Aprovação explícita</h3>
+            <p>“Posso enviar e-mails para estes 15 contatos?” — sem auto-envio silencioso.</p>
+          </div>
+          <div class="card card-accent">
+            <h3>3 · Execução + registro</h3>
+            <p>E-mail / SMS disparados e interação gravada no CRM na mesma hora.</p>
+          </div>
+        </div>
+        <div class="card" style="margin-top: 0.75rem;">
+          <h3>Blindagem da IA</h3>
+          <p>
+            Dados vindos das bases passam por sanitização antes de chegar ao Copilot ou Claude —
+            protegendo o ambiente corporativo contra conteúdo malicioso embutido em textos externos.
+          </p>
+        </div>
+        <div class="footer-bar">
+          <span>BuscaFornecedor · MCP Search Hub</span>
+          <span>Governança · Human-in-the-loop · segurança</span>
+        </div>
+      </section>
+
+      <!-- ROI -->
+      <section class="slide-content">
+        <div class="slide-header">
+          <img class="logo-sm" src="assets/logo-transparent.png" alt="BuscaFornecedor" />
+          <span class="slide-num">12 · Viabilidade</span>
+        </div>
+        <h2>Modelo de custo alinhado ao que você já tem</h2>
+        <p class="lead">Reaproveita stack atual (dados, buscas, automações) e licenciamentos Microsoft existentes.</p>
+        <div class="grid-2">
+          <div class="card">
+            <span class="badge good">Uso interno</span>
+            <h3>Custo adicional: tendência a zero</h3>
+            <ul>
+              <li>Aproveita licenças Microsoft 365 Copilot já contratadas</li>
+              <li>Acesso pelo Teams e ferramentas Office</li>
+              <li>Sem reconstruir buscas, CRM ou mensageria</li>
+            </ul>
+          </div>
+          <div class="card card-warn">
+            <span class="badge">Uso externo / escala</span>
+            <h3>Pay-as-you-go quando fizer sentido</h3>
+            <ul>
+              <li>Modelo elástico via Copilot Studio / Azure</li>
+              <li>Pacotes corporativos para volume previsível</li>
+              <li>Sem infra de front dedicada só para o agente</li>
+            </ul>
+          </div>
+        </div>
+        <div class="grid-3" style="margin-top: 0.75rem;">
+          <div class="card kpi">
+            <span class="value">1</span>
+            <span class="label">fonte de verdade para busca e ações</span>
+          </div>
+          <div class="card kpi">
+            <span class="value">0</span>
+            <span class="label">necessidade de reinventar o stack</span>
+          </div>
+          <div class="card kpi">
+            <span class="value">2+</span>
+            <span class="label">portas de entrada: Copilot e Claude</span>
+          </div>
+        </div>
+        <div class="footer-bar">
+          <span>BuscaFornecedor · MCP Search Hub</span>
+          <span>ROI sobre ativos já existentes</span>
+        </div>
+      </section>
+
+      <!-- ROADMAP -->
+      <section class="slide-content">
+        <div class="slide-header">
+          <img class="logo-sm" src="assets/logo-transparent.png" alt="BuscaFornecedor" />
+          <span class="slide-num">13 · Implementação</span>
+        </div>
+        <h2>Roadmap em 4 fases</h2>
+        <p class="lead">Transição estruturada, reaproveitando integralmente a infraestrutura atual.</p>
+        <div class="grid-2">
+          <div class="card phase">
+            <div class="phase-n">Fase 1</div>
+            <h3>Auditoria e encapsulamento</h3>
+            <p>Mapear APIs e fluxos (cidades, busca, CRM, mensageria) e expô-los como ferramentas padronizadas.</p>
+          </div>
+          <div class="card phase">
+            <div class="phase-n">Fase 2</div>
+            <h3>Motor de relevância</h3>
+            <p>Afinar a busca (intenção, peso produto/serviço, localização) e critérios de qualidade do ranking.</p>
+          </div>
+          <div class="card phase">
+            <div class="phase-n">Fase 3</div>
+            <h3>Integração MCP</h3>
+            <p>Conectar o Hub ao Microsoft Copilot e ao Claude — mesmos contratos, experiências distintas.</p>
+          </div>
+          <div class="card phase card-accent">
+            <div class="phase-n">Fase 4</div>
+            <h3>Orquestração e handover</h3>
+            <p>Travas de segurança, treinamento do time, playbooks de uso e go-live controlado.</p>
+          </div>
+        </div>
+        <div class="footer-bar">
+          <span>BuscaFornecedor · MCP Search Hub</span>
+          <span>Detalhamento no arquivo plano-implementacao.md</span>
+        </div>
+      </section>
+
+      <!-- POR QUE AGORA -->
+      <section class="slide-content">
+        <div class="slide-header">
+          <img class="logo-sm" src="assets/logo-transparent.png" alt="BuscaFornecedor" />
+          <span class="slide-num">14 · Por que agora</span>
+        </div>
+        <h2>Três razões para liderar com MCP</h2>
+        <p class="lead">Não é reescrever o produto — é colocar o que já existe na mão do usuário via IA.</p>
+        <div class="grid-3">
+          <div class="card">
+            <span class="badge">Ativos</span>
+            <h3>Aproveitamento imediato</h3>
+            <p>Maximiza o retorno do que já roda em busca, dados e automações — sem projeto-greenfield.</p>
+          </div>
+          <div class="card">
+            <span class="badge">Adoção</span>
+            <h3>Barreira de entrada zero</h3>
+            <p>Diretores e analistas consultam e agem em linguagem natural no ambiente Microsoft.</p>
+          </div>
+          <div class="card">
+            <span class="badge">Posição</span>
+            <h3>Pioneirismo</h3>
+            <p>Protocolo MCP + agentes declarativos antes do mercado geral padronizar esse modelo.</p>
+          </div>
+        </div>
+        <div class="footer-bar">
+          <span>BuscaFornecedor · MCP Search Hub</span>
+          <span>Vanguarda da automação comercial</span>
+        </div>
+      </section>
+
+      <!-- PRÓXIMOS PASSOS -->
+      <section class="slide-content">
+        <div class="slide-header">
+          <img class="logo-sm" src="assets/logo-transparent.png" alt="BuscaFornecedor" />
+          <span class="slide-num">15 · Próximos passos</span>
+        </div>
+        <h2>Como avançamos a partir daqui</h2>
+        <p class="lead">Checklist executivo para sair do alinhamento e entrar em entrega.</p>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Decisões de negócio</h3>
+            <ul>
+              <li>Personas piloto (ops comercial / direção)</li>
+              <li>Canais prioritários: Copilot primeiro, Claude em paralelo</li>
+              <li>Regras de aprovação para envios</li>
+              <li>Métricas de sucesso (tempo, qualidade, conversão)</li>
+            </ul>
+          </div>
+          <div class="card card-accent">
+            <h3>Entregáveis técnicos</h3>
+            <ul>
+              <li>Catálogo de ferramentas MCP</li>
+              <li>Fluxos n8n com trigger MCP</li>
+              <li>Sanitização e quotas</li>
+              <li>Playbook de uso + treinamento</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bar">
+          <span>BuscaFornecedor · MCP Search Hub</span>
+          <span>Do alinhamento ao piloto</span>
+        </div>
+      </section>
+
+      <!-- ENCERRAMENTO -->
+      <section class="slide-cover" data-background-color="#0F3052">
+        <div class="logo-wrap">
+          <img src="assets/logo-transparent.png" alt="BuscaFornecedor" />
+        </div>
+        <span class="tag">Próximo passo</span>
+        <h1 style="max-width: 20ch;">Coloque a busca na conversa do time</h1>
+        <p class="subtitle">
+          Conectando compradores e fornecedores através de tecnologia e dados inteligentes — agora também via Copilot e Claude.
+        </p>
+        <p class="subtitle" style="font-size: 0.9rem; margin-bottom: 0;">
+          <a href="https://buscafornecedor.com.br/">buscafornecedor.com.br</a>
+        </p>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: "c/t",
+      width: 1280,
+      height: 720,
+      margin: 0.04,
+      transition: "slide",
+      backgroundTransition: "fade",
+    });
+  </script>
+</body>
+</html>

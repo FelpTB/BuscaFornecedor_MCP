@@ -24,6 +24,10 @@ app.get("/comercial", (_req, res) => {
   res.sendFile(path.join(ROOT, "apresentacao-comercial.html"));
 });
 
+app.get("/portfolio", (_req, res) => {
+  res.sendFile(path.join(ROOT, "portfolio_apresentacao", "index.html"));
+});
+
 app.get("/saude", (_req, res) => {
   res.status(200).type("text/plain").send("ok");
 });

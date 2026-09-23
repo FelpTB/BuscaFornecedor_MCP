@@ -16,12 +16,19 @@ app.use(
         res.setHeader("Content-Type", "application/pdf");
         res.setHeader("Content-Disposition", "inline");
       }
+      if (filePath.endsWith(".html") || filePath.endsWith(".css")) {
+        res.setHeader("Cache-Control", "no-cache");
+      }
     },
   })
 );
 
 app.get("/comercial", (_req, res) => {
   res.sendFile(path.join(ROOT, "apresentacao-comercial.html"));
+});
+
+app.get("/pipefy", (_req, res) => {
+  res.sendFile(path.join(ROOT, "apresentacao-pipefy.html"));
 });
 
 app.get("/portfolio", (_req, res) => {

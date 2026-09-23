@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BuscaFornecedor × Pipefy</title>
+  <link rel="icon" href="assets/logo-transparent.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+  <link rel="stylesheet" href="theme-pipefy.css" />
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- 01 COVER -->
+      <section class="slide-cover-bf" data-background-color="#0F3052">
+        <div class="bf-slide bf-cover">
+          <div class="bf-cover-brand">
+            <img class="brand-mark" src="assets/logo-transparent.png" alt="BuscaFornecedor" />
+            <span>Sessão técnica · Integração</span>
+          </div>
+
+          <h1>Busca<br />Fornecedor</h1>
+
+          <div class="bf-pills">
+            <span>40M+ empresas</span>
+            <span>busca multi-vetor</span>
+            <span>API · MCP · agentes</span>
+            <span>modelo próprio</span>
+            <span>atualização contínua</span>
+          </div>
+
+          <div class="bf-cover-art" aria-hidden="true">
+            <div class="orbit"></div>
+            <div class="orbit o2"></div>
+            <div class="orbit o3"></div>
+            <span class="chip c1">API</span>
+            <span class="chip c2">MCP</span>
+            <span class="chip c3">Agente</span>
+            <div class="hex-frame">
+              <img src="assets/logo-transparent.png" alt="BuscaFornecedor" />
+            </div>
+          </div>
+
+          <div class="bf-foot">
+            <span>buscafornecedor.com.br · deck técnico</span>
+            <span></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 02 PLATAFORMA -->
+      <section data-background-color="#FFFFFF">
+        <div class="bf-slide">
+          <p class="bf-eyebrow">01 · Visão geral</p>
+          <div class="bf-stat-ink">
+            <div class="v">40M+</div>
+            <div class="l">estabelecimentos da Receita Federal como ponto de partida.</div>
+          </div>
+
+          <h2 class="bf-title" style="max-width: 22ch;">
+            Qualificar fornecedores com<br />
+            evidência de mercado,<br />
+            <span class="accent">não com listas internas.</span>
+          </h2>
+          <div class="bf-rule"></div>
+
+          <p class="bf-caption">Em operação por compradores B2B</p>
+          <div class="bf-logo-row">
+            <div class="cell logo-wide"><img src="Logos/Alpargatas_sa_logo.png" alt="Alpargatas" /></div>
+            <div class="cell logo-wide"><img src="Logos/Bracell_logo.svg.png" alt="Bracell" /></div>
+            <div class="cell"><img src="Logos/jbs-logo.png" alt="JBS" /></div>
+            <div class="cell logo-tall"><img src="Logos/ype-logo.png" alt="Ypê" /></div>
+            <div class="cell logo-wide"><img src="Logos/nestle-logo-8.png" alt="Nestlé" /></div>
+            <div class="cell logo-tall"><img src="Logos/tribunal-justica-para.png" alt="Tribunal de Justiça do Pará" /></div>
+          </div>
+
+          <p class="bf-caption">Desafios resolvidos para o usuário final</p>
+          <div class="bf-challenges">
+            <div class="ch">
+              <h3>Listas e planilhas</h3>
+              <p>O sourcing ainda vive em arquivos soltos, repasses por e-mail e bases desatualizadas — lento para achar e difícil de repetir.</p>
+            </div>
+            <div class="ch">
+              <h3>CNPJ e CNAE não bastam</h3>
+              <p>Cadastro formal não descreve o que a empresa entrega de fato. O site traz a evidência — mas ler milhares de sites à mão não escala.</p>
+            </div>
+            <div class="ch dark">
+              <h3>Busca genérica falha</h3>
+              <p>Google e listas abertas misturam revendedor, fabricante e prestador. Falta ranquear por intenção, região e especialidade real.</p>
+            </div>
+          </div>
+
+          <div class="bf-foot">
+            <span>Visão geral · problema e base de usuários</span>
+            <span></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 03 CONSTRUÇÃO -->
+      <section data-background-color="#FFFFFF">
+        <div class="bf-slide">
+          <p class="bf-eyebrow">02 · Construção do banco</p>
+          <h2 class="bf-title" style="max-width: 24ch;">
+            Do cadastro público<br />
+            <span class="soft">ao perfil pesquisável.</span>
+          </h2>
+          <div class="bf-rule"></div>
+
+          <div class="bf-stages">
+            <div class="bf-stage">
+              <div class="n">01</div>
+              <h3>Base da Receita</h3>
+              <p>Partimos de uma base nacional com mais de 40 milhões de estabelecimentos — o universo completo de empresas do país como ponto de partida.</p>
+            </div>
+            <div class="bf-stage">
+              <div class="n">02</div>
+              <h3>Filtro de recorte</h3>
+              <p>Excluímos MEI, autarquias, aberturas recentes e filiais — para focar em empresas com maior potencial de atendimento B2B.</p>
+            </div>
+            <div class="bf-stage">
+              <div class="n">03</div>
+              <h3>Descoberta de site</h3>
+              <p>Com os dados cadastrais, enriquecemos cada empresa elegível até encontrar o site oficial — a fonte da evidência de mercado.</p>
+            </div>
+            <div class="bf-stage ink">
+              <div class="n">04</div>
+              <h3>Scrape em massa</h3>
+              <p>Rede de proxies e controle de acesso para contornar bloqueios, lidar com sites lentos e escalar a leitura para milhões de páginas — às vezes com mais de uma tentativa.</p>
+            </div>
+            <div class="bf-stage">
+              <div class="n">05</div>
+              <h3>Perfil com modelo próprio</h3>
+              <p>Para reduzir custo, um modelo auto-hospedado — treinado para esta tarefa — extrai dados do site e monta o perfil estruturado da empresa.</p>
+            </div>
+            <div class="bf-stage accent">
+              <div class="n">06</div>
+              <h3>Banco de busca</h3>
+              <p>Cada perfil vira dimensões de busca (produto, serviço, clientes…) para o comprador encontrar por intenção — não só por palavra-chave.</p>
+            </div>
+          </div>
+
+          <div class="bf-foot">
+            <span>Construção · da Receita ao índice de busca</span>
+            <span></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 03b SCRAPE -->
+      <section data-background-color="#FFFFFF">
+        <div class="bf-slide">
+          <p class="bf-eyebrow">02a · Scrape em massa</p>
+          <h2 class="bf-title" style="max-width: 26ch; font-size: 34px;">
+            Ler milhões de sites<br />
+            <span class="soft">sem derrubar o acesso.</span>
+          </h2>
+          <div class="bf-rule"></div>
+
+          <div class="bf-scrape-slide">
+            <div class="bf-scrape-visual">
+              <div class="svg-wrap" aria-hidden="true">
+                <svg viewBox="0 0 640 480" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient id="scG" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stop-color="#3D9BD0" stop-opacity="0.12"/>
+                      <stop offset="100%" stop-color="#2A9D8F" stop-opacity="0.28"/>
+                    </linearGradient>
+                  </defs>
+                  <rect width="640" height="480" fill="url(#scG)"/>
+
+                  <!-- Sites column -->
+                  <text x="36" y="48" fill="rgba(255,255,255,0.55)" font-size="11" font-family="JetBrains Mono, monospace" letter-spacing="1">SITES</text>
+                  <g>
+                    <rect x="28" y="64" width="100" height="36" rx="6" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.25)"/>
+                    <text x="48" y="86" fill="#fff" font-size="12" font-family="Inter, sans-serif">site A</text>
+                    <rect x="28" y="112" width="100" height="36" rx="6" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.25)"/>
+                    <text x="48" y="134" fill="#fff" font-size="12" font-family="Inter, sans-serif">site B</text>
+                    <rect x="28" y="160" width="100" height="36" rx="6" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.25)"/>
+                    <text x="48" y="182" fill="#fff" font-size="12" font-family="Inter, sans-serif">site C</text>
+                    <rect x="28" y="208" width="100" height="36" rx="6" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)"/>
+                    <text x="42" y="230" fill="rgba(255,255,255,0.7)" font-size="12" font-family="Inter, sans-serif">site … N</text>
+                  </g>
+
+                  <!-- arrows into proxy pool -->
+                  <g stroke="#3D9BD0" stroke-width="1.5" fill="none" opacity="0.85">
+                    <path d="M128 82 H170"/>
+                    <path d="M128 130 H170"/>
+                    <path d="M128 178 H170"/>
+                    <path d="M128 226 H170" stroke-dasharray="4 3"/>
+                  </g>
+
+                  <!-- Proxy pool -->
+                  <text x="200" y="48" fill="rgba(255,255,255,0.55)" font-size="11" font-family="JetBrains Mono, monospace" letter-spacing="1">POOL DE PROXIES</text>
+                  <rect x="180" y="60" width="260" height="220" rx="10" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.22)"/>
+
+                  <!-- Lane 1 -->
+                  <rect x="196" y="80" width="228" height="48" rx="6" fill="rgba(61,155,208,0.25)" stroke="#3D9BD0"/>
+                  <text x="208" y="100" fill="#7EC8E8" font-size="11" font-family="JetBrains Mono, monospace">faixa A</text>
+                  <text x="208" y="116" fill="rgba(255,255,255,0.75)" font-size="11" font-family="Inter, sans-serif">parte da carga · ritmo próprio</text>
+                  <!-- capacity bar -->
+                  <rect x="340" y="92" width="70" height="8" rx="2" fill="rgba(255,255,255,0.15)"/>
+                  <rect x="340" y="92" width="48" height="8" rx="2" fill="#3D9BD0"/>
+
+                  <!-- Lane 2 -->
+                  <rect x="196" y="140" width="228" height="48" rx="6" fill="rgba(42,157,143,0.22)" stroke="#2A9D8F"/>
+                  <text x="208" y="160" fill="#7ED4C4" font-size="11" font-family="JetBrains Mono, monospace">faixa B</text>
+                  <text x="208" y="176" fill="rgba(255,255,255,0.75)" font-size="11" font-family="Inter, sans-serif">outra fatia · em paralelo</text>
+                  <rect x="340" y="152" width="70" height="8" rx="2" fill="rgba(255,255,255,0.15)"/>
+                  <rect x="340" y="152" width="58" height="8" rx="2" fill="#2A9D8F"/>
+
+                  <!-- Lane 3 -->
+                  <rect x="196" y="200" width="228" height="48" rx="6" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.3)"/>
+                  <text x="208" y="220" fill="rgba(255,255,255,0.8)" font-size="11" font-family="JetBrains Mono, monospace">faixa C</text>
+                  <text x="208" y="236" fill="rgba(255,255,255,0.75)" font-size="11" font-family="Inter, sans-serif">diversifica origem do acesso</text>
+                  <rect x="340" y="212" width="70" height="8" rx="2" fill="rgba(255,255,255,0.15)"/>
+                  <rect x="340" y="212" width="40" height="8" rx="2" fill="rgba(255,255,255,0.55)"/>
+
+                  <!-- gate / control -->
+                  <text x="470" y="48" fill="rgba(255,255,255,0.55)" font-size="11" font-family="JetBrains Mono, monospace" letter-spacing="1">CONTROLE</text>
+                  <rect x="460" y="80" width="150" height="80" rx="8" fill="rgba(15,48,82,0.65)" stroke="rgba(255,255,255,0.25)"/>
+                  <text x="478" y="108" fill="#fff" font-size="13" font-family="Inter, sans-serif" font-weight="600">Limite por faixa</text>
+                  <text x="478" y="128" fill="rgba(255,255,255,0.7)" font-size="11" font-family="Inter, sans-serif">+ pausa se o site</text>
+                  <text x="478" y="144" fill="rgba(255,255,255,0.7)" font-size="11" font-family="Inter, sans-serif">ficar instável</text>
+
+                  <!-- arrows out -->
+                  <path d="M440 170 H460" stroke="#3D9BD0" stroke-width="1.5" fill="none"/>
+                  <path d="M535 160 C560 160 560 200 535 200" stroke="#2A9D8F" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/>
+
+                  <!-- Output -->
+                  <text x="460" y="200" fill="rgba(255,255,255,0.55)" font-size="11" font-family="JetBrains Mono, monospace" letter-spacing="1">SAÍDA</text>
+                  <rect x="460" y="210" width="150" height="70" rx="8" fill="#2A9D8F"/>
+                  <text x="478" y="240" fill="#fff" font-size="14" font-family="Inter, sans-serif" font-weight="600">Conteúdo do site</text>
+                  <text x="478" y="260" fill="rgba(255,255,255,0.85)" font-size="11" font-family="Inter, sans-serif">pronto para o perfil</text>
+
+                  <!-- slow/retry callout -->
+                  <rect x="28" y="300" width="412" height="56" rx="8" fill="rgba(61,155,208,0.18)" stroke="rgba(61,155,208,0.45)"/>
+                  <text x="44" y="324" fill="#7EC8E8" font-size="12" font-family="JetBrains Mono, monospace">SITES LENTOS / BLOQUEIO</text>
+                  <text x="44" y="344" fill="rgba(255,255,255,0.85)" font-size="12" font-family="Inter, sans-serif">nova tentativa · outra faixa · sem travar o lote inteiro</text>
+                </svg>
+              </div>
+              <div class="overlay-copy">
+                <h3>Partição de carga, não “fila única”</h3>
+                <p>
+                  Várias faixas de proxy trabalham em paralelo, cada uma com seu ritmo.
+                  O objetivo é escalar a leitura e reduzir bloqueios — sem depender de um único caminho.
+                </p>
+              </div>
+            </div>
+
+            <div class="bf-scrape-side">
+              <div class="point">
+                <div class="n">01</div>
+                <h4>Anti-bloqueio</h4>
+                <p>O acesso simula um navegador real e distribui as requisições entre várias origens, para sites com proteção anti-bot não cortarem o lote.</p>
+              </div>
+              <div class="point ink">
+                <div class="n">02</div>
+                <h4>Proxies em faixas</h4>
+                <p>A carga é dividida entre provedores/faixas — cada uma com limite próprio. Não é “tentar A e só depois B”: as faixas operam juntas.</p>
+              </div>
+              <div class="point">
+                <div class="n">03</div>
+                <h4>Sites lentos e instáveis</h4>
+                <p>Há espera controlada, limite por domínio e pausa automática quando um host falha demais — o resto do lote segue.</p>
+              </div>
+              <div class="point teal">
+                <div class="n">04</div>
+                <h4>Escala + nova tentativa</h4>
+                <p>Desenhado para milhões de páginas. Se a primeira leitura falhar ou o site exigir mais de um acesso, o sistema reprocessa sem refazer tudo do zero.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bf-foot">
+            <span>Scrape · proxies · controle de ritmo · escala</span>
+            <span></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 04 VETORES -->
+      <section data-background-color="#FFFFFF">
+        <div class="bf-slide">
+          <p class="bf-eyebrow">02b · Como o perfil é pesquisado</p>
+          <h2 class="bf-title" style="max-width: 26ch; font-size: 34px;">
+            Seis dimensões<br />
+            <span class="soft">para uma busca guiada por atributos.</span>
+          </h2>
+          <div class="bf-rule"></div>
+
+          <div class="bf-vector-slide">
+            <div class="bf-vector-visual">
+              <div class="svg-wrap" aria-hidden="true">
+                <svg viewBox="0 0 640 480" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient id="gAxis" x1="0" y1="1" x2="1" y2="0">
+                      <stop offset="0%" stop-color="#3D9BD0" stop-opacity="0.15"/>
+                      <stop offset="100%" stop-color="#2A9D8F" stop-opacity="0.35"/>
+                    </linearGradient>
+                    <filter id="glow"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                  </defs>
+                  <rect width="640" height="480" fill="url(#gAxis)"/>
+                  <!-- grid -->
+                  <g stroke="rgba(255,255,255,0.12)" stroke-width="1">
+                    <line x1="80" y1="360" x2="520" y2="360"/>
+                    <line x1="80" y1="360" x2="80" y2="80"/>
+                    <line x1="80" y1="360" x2="200" y2="420"/>
+                    <line x1="120" y1="340" x2="480" y2="340" stroke-dasharray="4 6"/>
+                    <line x1="120" y1="300" x2="460" y2="300" stroke-dasharray="4 6"/>
+                    <line x1="120" y1="260" x2="440" y2="260" stroke-dasharray="4 6"/>
+                    <line x1="120" y1="220" x2="420" y2="220" stroke-dasharray="4 6"/>
+                    <line x1="160" y1="360" x2="160" y2="100" stroke-dasharray="4 6"/>
+                    <line x1="240" y1="360" x2="240" y2="100" stroke-dasharray="4 6"/>
+                    <line x1="320" y1="360" x2="320" y2="100" stroke-dasharray="4 6"/>
+                    <line x1="400" y1="360" x2="400" y2="100" stroke-dasharray="4 6"/>
+                  </g>
+                  <!-- axes labels -->
+                  <text x="500" y="380" fill="rgba(255,255,255,0.45)" font-size="11" font-family="JetBrains Mono, monospace">produto</text>
+                  <text x="40" y="90" fill="rgba(255,255,255,0.45)" font-size="11" font-family="JetBrains Mono, monospace">serviço</text>
+                  <text x="210" y="440" fill="rgba(255,255,255,0.45)" font-size="11" font-family="JetBrains Mono, monospace">clientes</text>
+                  <!-- points -->
+                  <g filter="url(#glow)">
+                    <circle cx="210" cy="250" r="6" fill="#3D9BD0"/>
+                    <circle cx="280" cy="190" r="5" fill="#2A9D8F"/>
+                    <circle cx="340" cy="240" r="7" fill="#3D9BD0"/>
+                    <circle cx="300" cy="290" r="4" fill="#7EC8E8"/>
+                    <circle cx="380" cy="180" r="5" fill="#2A9D8F"/>
+                    <circle cx="250" cy="210" r="4" fill="#7EC8E8"/>
+                    <circle cx="360" cy="270" r="6" fill="#3D9BD0"/>
+                  </g>
+                  <!-- query marker -->
+                  <circle cx="340" cy="240" r="18" fill="none" stroke="#3D9BD0" stroke-width="2" opacity="0.7"/>
+                  <circle cx="340" cy="240" r="28" fill="none" stroke="#3D9BD0" stroke-width="1" opacity="0.35"/>
+                  <!-- search bar -->
+                  <rect x="160" y="36" width="280" height="36" rx="8" fill="rgba(255,255,255,0.95)"/>
+                  <text x="176" y="58" fill="#5A6B7D" font-size="13" font-family="Inter, sans-serif">instalação ar-condicionado · Campinas</text>
+                  <circle cx="416" cy="54" r="10" fill="#0F3052"/>
+                  <circle cx="416" cy="54" r="5" fill="none" stroke="#fff" stroke-width="1.5"/>
+                  <!-- flows -->
+                  <path d="M340 222 C340 160 300 100 300 72" fill="none" stroke="#3D9BD0" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.8"/>
+                  <text x="348" y="140" fill="#3D9BD0" font-size="10" font-family="JetBrains Mono, monospace">query</text>
+                </svg>
+              </div>
+              <div class="overlay-copy">
+                <h3>Por que separar em vetores?</h3>
+                <p>
+                  Cada dimensão isola um atributo do perfil. Assim a busca deixa de ser “genérica”
+                  e passa a ser <strong style="color:#fff;">guiada</strong> — mais peso em serviço, produto ou clientes,
+                  conforme o que o usuário pediu.
+                </p>
+              </div>
+            </div>
+
+            <div class="bf-vector-side">
+              <div class="bf-why">
+                <p><strong>Busca por atributos pontuais:</strong> o ranking combina similaridade semântica (vetores densos) com validação de termos específicos via <strong>BM25</strong> (vetor esparso).</p>
+              </div>
+
+              <div class="bf-vecs-compact">
+                <div class="bf-vec">
+                  <div class="tag">Denso</div>
+                  <h4>Descrição</h4>
+                  <p>Visão geral da empresa — o que ela é e como se apresenta no mercado.</p>
+                </div>
+                <div class="bf-vec">
+                  <div class="tag">Denso</div>
+                  <h4>Clientes</h4>
+                  <p>Clientes e projetos mais atuais, com foco no trabalho recente.</p>
+                </div>
+                <div class="bf-vec">
+                  <div class="tag">Denso</div>
+                  <h4>Público-alvo</h4>
+                  <p>Perfil de quem a empresa costuma atender — histórico de atuação.</p>
+                </div>
+                <div class="bf-vec">
+                  <div class="tag">Denso</div>
+                  <h4>Produtos</h4>
+                  <p>O que a empresa vende — catálogo e ofertas de produto.</p>
+                </div>
+                <div class="bf-vec">
+                  <div class="tag">Denso</div>
+                  <h4>Serviços</h4>
+                  <p>O que a empresa presta — instalação, consultoria, manutenção etc.</p>
+                </div>
+                <div class="bf-vec sparse">
+                  <div class="tag">Esparso · BM25</div>
+                  <h4>Termos exatos</h4>
+                  <p>SKUs, marcas, códigos e jargões — valida a string no perfil, não só o sentido.</p>
+                </div>
+              </div>
+
+              <p class="bf-caption" style="margin: 4px 0 0;">Possíveis expansões</p>
+              <div class="bf-future-row">
+                <div class="bf-vec future">
+                  <div class="tag">Novo · denso</div>
+                  <h4>Certificações</h4>
+                  <p>Licenças, certificados e documentos do fornecedor no perfil.</p>
+                </div>
+                <div class="bf-vec future">
+                  <div class="tag">Novo · esparso</div>
+                  <h4>Nomes de clientes</h4>
+                  <p>Busca direta por empresas que já possam ter sido atendidas.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bf-foot">
+            <span>Índice multi-vetor · significado + BM25</span>
+            <span></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 05 VISÃO DO USUÁRIO -->
+      <section data-background-color="#FFFFFF">
+        <div class="bf-slide">
+          <p class="bf-eyebrow">03 · Experiência de busca</p>
+          <h2 class="bf-title" style="max-width: 22ch;">
+            Como o usuário<br />
+            <span class="soft">consulta o sistema.</span>
+          </h2>
+          <div class="bf-rule teal"></div>
+
+          <div class="bf-journey">
+            <div class="bf-jstep">
+              <div class="n">01</div>
+              <h3>Descreve a necessidade</h3>
+              <p>Em linguagem natural — produto, serviço, região, urgência — no portal, WhatsApp, agente ou integração.</p>
+            </div>
+            <div class="bf-jstep">
+              <div class="n">02</div>
+              <h3>O sistema interpreta</h3>
+              <p>Identifica se a busca pende para produto, serviço ou ambos e prepara a estratégia de ranking.</p>
+            </div>
+            <div class="bf-jstep ink">
+              <div class="n">03</div>
+              <h3>Ajusta os pesos</h3>
+              <p>O agente (ou a API) reforça dimensões relevantes — ex.: mais peso em serviço + localização — antes de consultar o índice.</p>
+            </div>
+            <div class="bf-jstep">
+              <div class="n">04</div>
+              <h3>Recebe a shortlist</h3>
+              <p>Lista ranqueada de fornecedores com perfil estruturado, pronta para o próximo passo no fluxo de compras.</p>
+            </div>
+          </div>
+
+          <div class="bf-chat-sample">
+            <div class="bf-bubble">
+              <div class="who">Usuário</div>
+              <p>“Preciso de instalação de ar-condicionado industrial num raio de 50 km de Campinas, com experiência em plantas alimentícias.”</p>
+            </div>
+            <div class="bf-bubble agent">
+              <div class="who">Agente</div>
+              <p>Prioriza serviço + clientes do setor + região. Devolve candidatos ranqueados — sem o usuário montar filtros técnicos.</p>
+            </div>
+          </div>
+
+          <div class="bf-foot">
+            <span>Jornada · intenção → pesos → shortlist</span>
+            <span></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 06 RETROALIMENTAÇÃO -->
+      <section data-background-color="#FFFFFF">
+        <div class="bf-slide">
+          <p class="bf-eyebrow">04 · Retroalimentação</p>
+          <h2 class="bf-title" style="max-width: 22ch;">
+            O banco acompanha<br />
+            <span class="soft">o que o site mostra hoje.</span>
+          </h2>
+          <div class="bf-rule teal"></div>
+          <p class="bf-lead">
+            Processo contínuo: detectar mudanças nos sites já explorados, revisitar essas páginas e remontar o perfil com as informações novas — para a shortlist não envelhecer.
+          </p>
+
+          <div class="bf-loop">
+            <div class="node">
+              <div class="n">01</div>
+              <h3>Detectar mudanças</h3>
+              <p>Monitoramos sites já conhecidos para identificar alterações relevantes de conteúdo — novas ofertas, reposicionamento, páginas atualizadas.</p>
+            </div>
+            <div class="arr">→</div>
+            <div class="node">
+              <div class="n">02</div>
+              <h3>Explorar de novo</h3>
+              <p>Recoletamos o site com o mesmo cuidado da primeira passagem — incluindo páginas internas importantes e casos de carregamento lento.</p>
+            </div>
+            <div class="arr">→</div>
+            <div class="node">
+              <div class="n">03</div>
+              <h3>Refazer o perfil</h3>
+              <p>O modelo reconstrói o perfil com a evidência nova e atualiza as dimensões de busca — produto, serviço, clientes e demais vetores.</p>
+            </div>
+          </div>
+
+          <div class="bf-foot">
+            <span>Atualização contínua · evidência fresca no índice</span>
+            <span></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 07 INTEGRAÇÃO -->
+      <section data-background-color="#FFFFFF">
+        <div class="bf-slide">
+          <p class="bf-eyebrow">05 · Integração com Pipefy</p>
+          <h2 class="bf-title" style="max-width: 28ch; font-size: 34px;">
+            Três modos de integração<br />
+            <span class="teal">sobre o mesmo núcleo de busca.</span>
+          </h2>
+          <p class="bf-lead">
+            REST, MCP e Agente compartilham o mesmo serviço de ranking (multi-vetor + BM25 + filtros).
+            A diferença está no contrato de consumo e no grau de orquestração.
+          </p>
+          <div class="bf-rule"></div>
+
+          <div class="bf-integ-3">
+            <div class="card">
+              <div class="lbl">01 · REST API</div>
+              <h3>Integração HTTP</h3>
+              <ul>
+                <li><span class="endpoint">POST /search/text</span> — envia o texto da necessidade, pesos por dimensão (produto, serviço, clientes…), filtros geográficos e, se quiser, uma query BM25 para termos exatos.</li>
+                <li><span class="endpoint">GET /config</span> — devolve o contrato público da busca: dimensões disponíveis, limites, flags de BM25 e autenticação esperada.</li>
+                <li>Auth via API key ou JWT do comprador. A resposta é JSON com a shortlist ranqueada, scores por dimensão e metadados para o card.</li>
+                <li><strong>No Pipefy:</strong> uma automação ou HTTP Request / webhook de saída dispara a busca quando o card muda de fase (ex.: “qualificar fornecedores”).</li>
+                <li>Adequado quando o fluxo é estável: mesmos campos, mesma regra, resultado previsível no pipe.</li>
+              </ul>
+              <p class="note">Fluxos determinísticos · regras fixas no pipe</p>
+            </div>
+            <div class="card teal">
+              <div class="lbl">02 · MCP</div>
+              <h3>Protocolo de ferramentas</h3>
+              <ul>
+                <li>O endpoint <span class="endpoint">/mcp</span> (Streamable HTTP) registra tools tipadas que qualquer cliente MCP consegue descobrir e chamar.</li>
+                <li>Tools principais: <strong>search_text</strong> (mesma busca da API), <strong>get_config</strong> (descobrir pesos/filtros) e tools de conversa para manter contexto.</li>
+                <li>Paridade 1:1 com o REST — mesmo motor de ranking, mesma auth, mesmos filtros. Não há “versão sombra” da busca.</li>
+                <li><strong>No Pipefy:</strong> um runtime ou agente MCP-compatible consome as tools sem reimplementar Qdrant, embeddings ou BM25.</li>
+                <li>Útil para padronizar o contrato entre Pipefy, Copilot, Claude e outras ferramentas que falem MCP.</li>
+              </ul>
+              <p class="note">Contrato padrão · clientes MCP e IDEs</p>
+            </div>
+            <div class="card accent">
+              <div class="lbl">03 · Agente</div>
+              <h3>Orquestração conversacional</h3>
+              <ul>
+                <li>Uma camada de agente (Pipefy AI, Copilot ou similar) interpreta a intenção em linguagem natural e decide <em>quando</em> chamar a busca.</li>
+                <li>Antes do <span class="endpoint">search_text</span>, o agente pode ajustar pesos (mais serviço, menos produto) e filtros de região com base no diálogo.</li>
+                <li>Em multi-turno, refina a shortlist (“só quem atende plantas alimentícias”, “aumenta o raio”) sem o usuário montar a query técnica.</li>
+                <li>O resultado volta formatado no card; aprovações, SLAs e governança continuam no Pipefy.</li>
+                <li>Encaixa quando cada solicitação é diferente e a orquestração precisa raciocinar, não só executar um HTTP fixo.</li>
+              </ul>
+              <p class="note">Intenção variável · multi-turno</p>
+            </div>
+          </div>
+
+          <div class="bf-foot">
+            <span>Integração · REST · MCP · Agente</span>
+            <span></span>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: "c/t",
+      width: 1280,
+      height: 720,
+      margin: 0,
+      minScale: 0.2,
+      maxScale: 2,
+      center: true,
+      transition: "fade",
+      backgroundTransition: "fade",
+      display: "block",
+    });
+  </script>
+</body>
+</html>

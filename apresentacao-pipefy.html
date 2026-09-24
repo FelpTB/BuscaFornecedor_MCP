@@ -270,10 +270,10 @@
         </div>
       </section>
 
-      <!-- 04 VETORES -->
+      <!-- 04 VETORES · opção A (foco na query) -->
       <section data-background-color="#FFFFFF">
         <div class="bf-slide">
-          <p class="bf-eyebrow">02b · Como o perfil é pesquisado</p>
+          <p class="bf-eyebrow">02b · Como o perfil é pesquisado · opção A</p>
           <h2 class="bf-title" style="max-width: 26ch; font-size: 34px;">
             Seis dimensões<br />
             <span class="soft">para uma busca guiada por atributos.</span>
@@ -282,12 +282,12 @@
 
           <div class="bf-vector-slide">
             <div class="bf-vector-visual">
-              <img class="diagram" src="assets/vector-db-graph.png" alt="Visualização do banco vetorial: pontos próximos compartilham descrições semelhantes" />
+              <img class="diagram" src="assets/vector-space-a.png" alt="Espaço vetorial 2D: ponto de consulta em destaque" />
               <div class="overlay-copy">
                 <h3>Proximidade = semelhança</h3>
                 <p>
-                  No banco vetorial, pontos próximos descrevem fornecedores parecidos.
-                  Quanto mais se afastam, mais as descrições divergem, como num grafo de similaridade.
+                  Pontos próximos descrevem fornecedores parecidos.
+                  Quanto mais se afastam, mais as descrições divergem.
                 </p>
               </div>
             </div>
@@ -347,7 +347,173 @@
           </div>
 
           <div class="bf-foot">
-            <span>Índice multi-vetor · significado + BM25</span>
+            <span>Opção A · foco na query · multi-vetor + BM25</span>
+            <span></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 04 VETORES · opção B (foco no cluster) -->
+      <section data-background-color="#FFFFFF">
+        <div class="bf-slide">
+          <p class="bf-eyebrow">02b · Como o perfil é pesquisado · opção B</p>
+          <h2 class="bf-title" style="max-width: 26ch; font-size: 34px;">
+            Seis dimensões<br />
+            <span class="soft">para uma busca guiada por atributos.</span>
+          </h2>
+          <div class="bf-rule"></div>
+
+          <div class="bf-vector-slide">
+            <div class="bf-vector-visual">
+              <img class="diagram" src="assets/vector-space-b.png" alt="Espaço vetorial 2D: cluster semântico de fornecedores similares" />
+              <div class="overlay-copy">
+                <h3>Proximidade = semelhança</h3>
+                <p>
+                  Pontos próximos descrevem fornecedores parecidos.
+                  Quanto mais se afastam, mais as descrições divergem.
+                </p>
+              </div>
+            </div>
+
+            <div class="bf-vector-side">
+              <div class="bf-why">
+                <p><strong>Busca por atributos pontuais:</strong> o ranking combina similaridade semântica (vetores densos) com validação de termos específicos via <strong>BM25</strong> (vetor esparso).</p>
+              </div>
+
+              <div class="bf-vecs-compact">
+                <div class="bf-vec">
+                  <div class="tag">Denso</div>
+                  <h4>Descrição</h4>
+                  <p>Visão geral da empresa, o que ela é e como se apresenta no mercado.</p>
+                </div>
+                <div class="bf-vec">
+                  <div class="tag">Denso</div>
+                  <h4>Clientes</h4>
+                  <p>Clientes e projetos mais atuais, com foco no trabalho recente.</p>
+                </div>
+                <div class="bf-vec">
+                  <div class="tag">Denso</div>
+                  <h4>Público-alvo</h4>
+                  <p>Perfil de quem a empresa costuma atender, pelo histórico de atuação.</p>
+                </div>
+                <div class="bf-vec">
+                  <div class="tag">Denso</div>
+                  <h4>Produtos</h4>
+                  <p>O que a empresa vende: catálogo e ofertas de produto.</p>
+                </div>
+                <div class="bf-vec">
+                  <div class="tag">Denso</div>
+                  <h4>Serviços</h4>
+                  <p>O que a empresa presta: instalação, consultoria, manutenção e afins.</p>
+                </div>
+                <div class="bf-vec sparse">
+                  <div class="tag">Esparso · BM25</div>
+                  <h4>Termos exatos</h4>
+                  <p>SKUs, marcas, códigos e jargões. Valida a string no perfil, não só o sentido.</p>
+                </div>
+              </div>
+
+              <p class="bf-caption" style="margin: 4px 0 0;">Adições planejadas para fevereiro de 2027</p>
+              <div class="bf-future-row">
+                <div class="bf-vec future">
+                  <div class="tag">Novo · denso</div>
+                  <h4>Certificações</h4>
+                  <p>Licenças, certificados e documentos do fornecedor no perfil.</p>
+                </div>
+                <div class="bf-vec future">
+                  <div class="tag">Novo · esparso</div>
+                  <h4>Nomes de clientes</h4>
+                  <p>Busca direta por empresas que já possam ter sido atendidas.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bf-foot">
+            <span>Opção B · foco no cluster · multi-vetor + BM25</span>
+            <span></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 04 VETORES · opção C (foco no espectro de distância) -->
+      <section data-background-color="#FFFFFF">
+        <div class="bf-slide">
+          <p class="bf-eyebrow">02b · Como o perfil é pesquisado · opção C</p>
+          <h2 class="bf-title" style="max-width: 26ch; font-size: 34px;">
+            Seis dimensões<br />
+            <span class="soft">para uma busca guiada por atributos.</span>
+          </h2>
+          <div class="bf-rule"></div>
+
+          <div class="bf-vector-slide">
+            <div class="bf-vector-visual">
+              <img class="diagram" src="assets/vector-space-c.png" alt="Espaço vetorial 2D: espectro de distância semântica" />
+              <div class="overlay-copy">
+                <h3>Proximidade = semelhança</h3>
+                <p>
+                  Pontos próximos descrevem fornecedores parecidos.
+                  Quanto mais se afastam, mais as descrições divergem.
+                </p>
+              </div>
+            </div>
+
+            <div class="bf-vector-side">
+              <div class="bf-why">
+                <p><strong>Busca por atributos pontuais:</strong> o ranking combina similaridade semântica (vetores densos) com validação de termos específicos via <strong>BM25</strong> (vetor esparso).</p>
+              </div>
+
+              <div class="bf-vecs-compact">
+                <div class="bf-vec">
+                  <div class="tag">Denso</div>
+                  <h4>Descrição</h4>
+                  <p>Visão geral da empresa, o que ela é e como se apresenta no mercado.</p>
+                </div>
+                <div class="bf-vec">
+                  <div class="tag">Denso</div>
+                  <h4>Clientes</h4>
+                  <p>Clientes e projetos mais atuais, com foco no trabalho recente.</p>
+                </div>
+                <div class="bf-vec">
+                  <div class="tag">Denso</div>
+                  <h4>Público-alvo</h4>
+                  <p>Perfil de quem a empresa costuma atender, pelo histórico de atuação.</p>
+                </div>
+                <div class="bf-vec">
+                  <div class="tag">Denso</div>
+                  <h4>Produtos</h4>
+                  <p>O que a empresa vende: catálogo e ofertas de produto.</p>
+                </div>
+                <div class="bf-vec">
+                  <div class="tag">Denso</div>
+                  <h4>Serviços</h4>
+                  <p>O que a empresa presta: instalação, consultoria, manutenção e afins.</p>
+                </div>
+                <div class="bf-vec sparse">
+                  <div class="tag">Esparso · BM25</div>
+                  <h4>Termos exatos</h4>
+                  <p>SKUs, marcas, códigos e jargões. Valida a string no perfil, não só o sentido.</p>
+                </div>
+              </div>
+
+              <p class="bf-caption" style="margin: 4px 0 0;">Adições planejadas para fevereiro de 2027</p>
+              <div class="bf-future-row">
+                <div class="bf-vec future">
+                  <div class="tag">Novo · denso</div>
+                  <h4>Certificações</h4>
+                  <p>Licenças, certificados e documentos do fornecedor no perfil.</p>
+                </div>
+                <div class="bf-vec future">
+                  <div class="tag">Novo · esparso</div>
+                  <h4>Nomes de clientes</h4>
+                  <p>Busca direta por empresas que já possam ter sido atendidas.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bf-foot">
+            <span>Opção C · foco no espectro de distância · multi-vetor + BM25</span>
             <span></span>
           </div>
         </div>
@@ -456,20 +622,26 @@
         <div class="bf-slide">
           <p class="bf-eyebrow">05 · Integração com Pipefy</p>
           <h2 class="bf-title" style="max-width: 28ch; font-size: 32px;">
-            Como as etapas se distribuem<br />
-            <span class="teal">em cada modo de implantação.</span>
+            Três modos de integração<br />
+            <span class="teal">sobre o mesmo núcleo de busca.</span>
           </h2>
           <p class="bf-lead">
-            Os quatro passos do processamento (texto, interpretação, embedding, consulta) se repartem de forma diferente entre Pipefy e BuscaFornecedor, conforme o modo escolhido.
+            REST, MCP e Agente compartilham o mesmo serviço de ranking (multi-vetor + BM25 + filtros).
+            A diferença está no contrato de consumo e no grau de orquestração.
           </p>
           <div class="bf-rule"></div>
 
           <div class="bf-deploy">
             <div class="row">
               <div class="mode">
-                <div class="lbl">01 · API</div>
-                <h3>Implantação por API</h3>
-                <p>Os passos <strong>1 e 2</strong> ficam do lado da Pipefy, feitos por agente ou pelo próprio usuário. O fluxo precisa ser desenhado em torno das chamadas HTTP à API.</p>
+                <div class="lbl">01 · REST API</div>
+                <h3>Integração HTTP</h3>
+                <p>
+                  <span class="endpoint">POST /search/text</span> recebe a necessidade, pesos por dimensão e filtros.
+                  <span class="endpoint">GET /config</span> devolve o contrato público da busca.
+                  Auth por API key ou JWT. No Pipefy, automação ou HTTP Request dispara a busca em mudança de fase.
+                  Adequado a fluxos estáveis, com regra previsível no pipe.
+                </p>
               </div>
               <div class="split">
                 <div class="side pipefy">
@@ -488,8 +660,14 @@
             <div class="row teal">
               <div class="mode">
                 <div class="lbl">02 · MCP</div>
-                <h3>Implantação por MCP</h3>
-                <p>Os passos <strong>1 e 2</strong> também ficam na Pipefy, com a vantagem de o sistema ser acessado via agente por uma Tool tipada, plug and play, sem reinventar o contrato da busca.</p>
+                <h3>Protocolo de ferramentas</h3>
+                <p>
+                  Endpoint <span class="endpoint">/mcp</span> (Streamable HTTP) com tools tipadas:
+                  <strong>search_text</strong>, <strong>get_config</strong> e tools de conversa.
+                  Paridade 1:1 com o REST, mesmo motor e mesma auth.
+                  Cliente MCP-compatible consome as tools sem reimplementar Qdrant, embeddings ou BM25.
+                  Útil para padronizar o contrato entre Pipefy, Copilot, Claude e outros clientes MCP.
+                </p>
               </div>
               <div class="split">
                 <div class="side pipefy">
@@ -508,8 +686,14 @@
             <div class="row accent">
               <div class="mode">
                 <div class="lbl">03 · Agente</div>
-                <h3>Implantação por Agente</h3>
-                <p>Só o passo <strong>1</strong> fica do lado da Pipefy. Nós fornecemos um agente treinado e dedicado a entender a consulta humana e transformá-la em consulta efetiva ao banco vetorizado.</p>
+                <h3>Orquestração conversacional</h3>
+                <p>
+                  Camada de agente interpreta a intenção e decide quando chamar a busca.
+                  Antes do <span class="endpoint">search_text</span>, ajusta pesos e filtros com base no diálogo.
+                  Em multi-turno, refina a shortlist sem o usuário montar a query técnica.
+                  O resultado volta no card; aprovações e governança continuam no Pipefy.
+                  Encaixa quando cada solicitação é diferente e precisa de raciocínio, não só HTTP fixo.
+                </p>
               </div>
               <div class="split">
                 <div class="side pipefy narrow">
@@ -527,7 +711,7 @@
           </div>
 
           <div class="bf-foot">
-            <span>Integração · API · MCP · Agente</span>
+            <span>Integração · REST · MCP · Agente</span>
             <span></span>
           </div>
         </div>

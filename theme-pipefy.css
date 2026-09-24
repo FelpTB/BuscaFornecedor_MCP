@@ -424,7 +424,7 @@ body {
   height: 100%;
   object-fit: cover;
   object-position: center;
-  opacity: 0.92;
+  opacity: 1;
 }
 
 .bf-vector-visual .overlay-copy {
@@ -1178,7 +1178,7 @@ body {
 }
 
 .bf-deploy .mode p {
-  font-size: 12.5px;
+  font-size: 11.5px;
   margin: 0;
   line-height: 1.4;
   color: var(--bf-muted);
@@ -1187,6 +1187,17 @@ body {
 .bf-deploy .mode p strong {
   color: var(--bf-navy);
   font-weight: 600;
+}
+
+.bf-deploy .mode .endpoint {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--bf-navy);
+  background: rgba(15, 48, 82, 0.08);
+  padding: 1px 5px;
+  border-radius: 2px;
+  white-space: nowrap;
 }
 
 .bf-deploy .split {

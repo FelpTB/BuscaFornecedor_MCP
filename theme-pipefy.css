@@ -355,6 +355,11 @@ body {
   object-position: center;
 }
 
+.bf-logo-row .cell img.logo-boost {
+  max-width: 96%;
+  max-height: 72px;
+}
+
 /* —— Vector slide visual —— */
 .bf-vector-slide {
   display: grid;

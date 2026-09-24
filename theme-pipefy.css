@@ -384,7 +384,8 @@ body {
   overflow: hidden;
 }
 
-.bf-vector-visual img.diagram {
+.bf-vector-visual img.diagram,
+.bf-vector-visual svg.diagram {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -392,6 +393,7 @@ body {
   object-fit: contain;
   object-position: center;
   opacity: 1;
+  display: block;
 }
 
 .bf-vector-visual .overlay-copy {
